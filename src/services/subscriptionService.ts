@@ -8,8 +8,9 @@ const RC_API_KEY_IOS = process.env.EXPO_PUBLIC_REVENUECAT_IOS_KEY ?? '';
 const RC_API_KEY_ANDROID = process.env.EXPO_PUBLIC_REVENUECAT_ANDROID_KEY ?? '';
 
 export async function initRevenueCat(platform: 'ios' | 'android') {
-  Purchases.setLogLevel(LOG_LEVEL.WARN);
   const apiKey = platform === 'ios' ? RC_API_KEY_IOS : RC_API_KEY_ANDROID;
+  if (!apiKey) return;
+  Purchases.setLogLevel(LOG_LEVEL.WARN);
   await Purchases.configure({ apiKey });
 }
 
