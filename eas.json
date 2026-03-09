@@ -34,7 +34,9 @@
         "buildType": "app-bundle"
       },
       "env": {
-        "EXPO_PUBLIC_API_BASE_URL": "https://api.cheapcheap.com.au/v1"
+        "EXPO_PUBLIC_API_BASE_URL": "https://api.cheapcheap.com.au/v1",
+        "EXPO_PUBLIC_SUPABASE_URL": "https://nrydajhckurgeuguvhfx.supabase.co",
+        "EXPO_PUBLIC_SUPABASE_ANON_KEY": "sb_publishable_cU7IA9MQCOkvJZhWMB55OA_il947IE2"
       }
     }
   },
