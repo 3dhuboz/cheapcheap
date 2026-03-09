@@ -203,6 +203,26 @@ alter table fuel_stations enable row level security;
 alter table fuel_prices enable row level security;
 alter table app_settings enable row level security;
 
+-- Drop existing policies to allow re-running this script
+drop policy if exists "Users can view own profile" on profiles;
+drop policy if exists "Users can update own profile" on profiles;
+drop policy if exists "Admins can view all profiles" on profiles;
+drop policy if exists "Users manage own lists" on grocery_lists;
+drop policy if exists "Users manage own list items" on grocery_list_items;
+drop policy if exists "Users manage own savings" on savings_records;
+drop policy if exists "Anyone can read stores" on stores;
+drop policy if exists "Anyone can read products" on products;
+drop policy if exists "Anyone can read store prices" on store_prices;
+drop policy if exists "Anyone can read fuel stations" on fuel_stations;
+drop policy if exists "Anyone can read fuel prices" on fuel_prices;
+drop policy if exists "Anyone can read app settings" on app_settings;
+drop policy if exists "Admins manage stores" on stores;
+drop policy if exists "Admins manage products" on products;
+drop policy if exists "Admins manage store prices" on store_prices;
+drop policy if exists "Admins manage fuel stations" on fuel_stations;
+drop policy if exists "Admins manage fuel prices" on fuel_prices;
+drop policy if exists "Admins manage app settings" on app_settings;
+
 -- Profiles: users read/update own, admins read all
 create policy "Users can view own profile" on profiles for select using (auth.uid() = id);
 create policy "Users can update own profile" on profiles for update using (auth.uid() = id);
