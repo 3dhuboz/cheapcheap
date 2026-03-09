@@ -3,6 +3,8 @@ import { OptimizationParams, OptimizationResult } from '../types';
 import { getListItems } from './listService';
 import { getProductPrices } from './priceService';
 
+const _resultCache = new Map<string, OptimizationResult>();
+
 export async function optimizeCart(params: OptimizationParams): Promise<OptimizationResult> {
   const items = await getListItems(params.list_id);
   const itemsWithProducts = items.filter(i => i.product_id);
@@ -28,7 +30,7 @@ export async function optimizeCart(params: OptimizationParams): Promise<Optimiza
   });
 
   const now = new Date();
-  return {
+  const result: OptimizationResult = {
     id: `local-${Date.now()}`,
     list_id: params.list_id,
     mode: params.mode,
@@ -42,10 +44,14 @@ export async function optimizeCart(params: OptimizationParams): Promise<Optimiza
     computed_at: now.toISOString(),
     expires_at: new Date(now.getTime() + 3600000).toISOString(),
   };
+  _resultCache.set(result.id, result);
+  return result;
 }
 
-export async function getOptimizationResult(_resultId: string): Promise<OptimizationResult> {
-  throw new Error('Optimization results are not persisted yet.');
+export async function getOptimizationResult(resultId: string): Promise<OptimizationResult> {
+  const cached = _resultCache.get(resultId);
+  if (cached) return cached;
+  throw new Error('Result not found. Please run optimisation again.');
 }
 
 export async function buildWeeklyShop(_params: {
