@@ -1,4 +1,4 @@
-import { ScrollView, View, Text, StyleSheet, RefreshControl } from 'react-native';
+import { ScrollView, View, Text, StyleSheet, RefreshControl, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useQuery } from '@tanstack/react-query';
 import { router } from 'expo-router';
@@ -41,7 +41,7 @@ export default function HomeScreen() {
             <Text style={styles.greeting}>👋 Hi, {firstName}!</Text>
             <Text style={styles.subGreeting}>Ready to save this week?</Text>
           </View>
-          <Text style={styles.logo}>🐥</Text>
+          <Image source={require('../../assets/logo.png')} style={styles.logo} resizeMode="contain" />
         </View>
 
         <WeeklyShopButton />
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
   },
   greeting: { fontSize: FontSize.lg, fontWeight: FontWeight.bold, color: Colors.text },
   subGreeting: { fontSize: FontSize.sm, color: Colors.textSecondary, marginTop: 2 },
-  logo: { fontSize: 36 },
+  logo: { width: 52, height: 52 },
   sectionHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',

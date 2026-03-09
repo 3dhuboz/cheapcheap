@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import {
   View, Text, StyleSheet, TextInput, TouchableOpacity,
-  KeyboardAvoidingView, Platform, ScrollView, Alert,
+  KeyboardAvoidingView, Platform, ScrollView, Alert, Image,
 } from 'react-native';
 import { router } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -58,8 +58,7 @@ export default function LoginScreen() {
   return (
     <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <LinearGradient colors={[Colors.primary, Colors.primaryDark]} style={styles.header}>
-        <Text style={styles.headerChick}>🐥</Text>
-        <Text style={styles.headerTitle}>Cheap Cheap</Text>
+        <Image source={require('../../assets/logo.png')} style={styles.headerLogo} resizeMode="contain" />
         <Text style={styles.headerSubtitle}>Save more every week</Text>
       </LinearGradient>
 
@@ -136,13 +135,12 @@ export default function LoginScreen() {
 
 const styles = StyleSheet.create({
   header: {
-    paddingTop: 60,
-    paddingBottom: Spacing.xxl,
+    paddingTop: 48,
+    paddingBottom: Spacing.xl,
     alignItems: 'center',
     gap: 4,
   },
-  headerChick: { fontSize: 48 },
-  headerTitle: { fontSize: FontSize.xl, fontWeight: FontWeight.extrabold, color: Colors.textInverse },
+  headerLogo: { width: 180, height: 120 },
   headerSubtitle: { fontSize: FontSize.sm, color: 'rgba(255,255,255,0.8)', fontWeight: FontWeight.medium },
   body: { flex: 1, backgroundColor: Colors.background },
   bodyContent: { padding: Spacing.base },

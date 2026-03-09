@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
-import { View, Text, StyleSheet, Animated } from 'react-native';
+import { View, Text, StyleSheet, Animated, Image } from 'react-native';
 import { router } from 'expo-router';
-import { LinearGradient } from 'expo-linear-gradient';
 import { Colors, FontSize, FontWeight } from '../../src/theme';
 
 export default function SplashScreen() {
@@ -18,13 +17,12 @@ export default function SplashScreen() {
   }, []);
 
   return (
-    <LinearGradient colors={[Colors.primary, Colors.primaryDark]} style={styles.container}>
+    <View style={styles.container}>
       <Animated.View style={[styles.logoContainer, { transform: [{ scale }], opacity }]}>
-        <Text style={styles.chick}>🐥</Text>
-        <Text style={styles.appName}>Cheap Cheap</Text>
+        <Image source={require('../../assets/logo.png')} style={styles.logo} resizeMode="contain" />
         <Text style={styles.tagline}>Your weekly savings companion</Text>
       </Animated.View>
-    </LinearGradient>
+    </View>
   );
 }
 
@@ -33,24 +31,19 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#FFFFFF',
   },
   logoContainer: {
     alignItems: 'center',
-    gap: 8,
+    gap: 12,
   },
-  chick: {
-    fontSize: 88,
-    marginBottom: 8,
-  },
-  appName: {
-    fontSize: FontSize.xxxl,
-    fontWeight: FontWeight.extrabold,
-    color: Colors.textInverse,
-    letterSpacing: -1,
+  logo: {
+    width: 280,
+    height: 280,
   },
   tagline: {
     fontSize: FontSize.base,
-    color: 'rgba(255,255,255,0.8)',
+    color: Colors.textSecondary,
     fontWeight: FontWeight.medium,
   },
 });

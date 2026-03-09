@@ -10,7 +10,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#2D9B4E"
+      "backgroundColor": "#FFFFFF"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -46,7 +46,7 @@
     },
     "web": {
       "bundler": "metro",
-      "output": "static",
+      "output": "single-page-app",
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
