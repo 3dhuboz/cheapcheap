@@ -50,13 +50,14 @@ export default function SettingsPage() {
               </div>
               <div className="flex items-center gap-3">
                 {(s.key === 'maintenance_mode') ? (
-                  <select value={edits[s.key]} onChange={e => setEdits(prev => ({ ...prev, [s.key]: e.target.value }))}
+                  <select aria-label={s.key} value={edits[s.key]} onChange={e => setEdits(prev => ({ ...prev, [s.key]: e.target.value }))}
                     className="border border-gray-300 rounded-lg px-3 py-2 text-sm w-28 focus:outline-none focus:ring-2 focus:ring-brand">
                     <option value="true">On</option>
                     <option value="false">Off</option>
                   </select>
                 ) : (
-                  <input value={edits[s.key] ?? ''} onChange={e => setEdits(prev => ({ ...prev, [s.key]: e.target.value }))}
+                  <input aria-label={s.key} value={edits[s.key] ?? ''} onChange={e => setEdits(prev => ({ ...prev, [s.key]: e.target.value }))}
+                    placeholder="value"
                     className="border border-gray-300 rounded-lg px-3 py-2 text-sm w-32 text-center focus:outline-none focus:ring-2 focus:ring-brand" />
                 )}
                 <button onClick={() => save(s.key)} disabled={saving === s.key}
