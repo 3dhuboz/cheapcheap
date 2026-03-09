@@ -1,7 +1,7 @@
 import * as Notifications from 'expo-notifications';
 import * as Device from 'expo-device';
 import { Platform } from 'react-native';
-import { apiPost } from '../lib/api';
+import { supabase } from '../lib/supabase';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -37,7 +37,9 @@ export async function registerForPushNotifications(): Promise<string | null> {
 }
 
 export async function savePushToken(token: string): Promise<void> {
-  await apiPost('/users/push-token', { token, platform: Platform.OS });
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return;
+  await supabase.from('profiles').update({ push_token: token }).eq('id', user.id);
 }
 
 export async function schedulePriceAlertNotification(
